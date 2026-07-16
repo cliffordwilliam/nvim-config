@@ -1,0 +1,4 @@
+# Plugin code fetched by vim.pack lives in the data dir, not here,
+# but ignore these just in case something writes them.
+spell/
+lazy-lock.json
