@@ -27,6 +27,7 @@ vim.o.number = true
 vim.o.relativenumber = true -- pairs with counts: 5j, 12k
 vim.o.mouse = 'a'
 vim.o.showmode = false -- redundant; the cursor already tells you
+vim.o.termguicolors = true -- 24-bit color; the colorscheme below needs it
 
 -- Sync with the system clipboard. Scheduled because probing the clipboard
 -- provider at startup measurably slows it down. Needs wl-clipboard (Wayland).
@@ -58,6 +59,20 @@ vim.o.expandtab = true
 vim.o.shiftwidth = 4
 vim.o.tabstop = 4
 vim.o.softtabstop = 4
+
+-- ============================================================================
+-- COLORSCHEME  (:help :colorscheme)
+--
+-- retrobox ships with Neovim -- no plugin. The stock 'default' scheme maps most
+-- of basedpyright's LSP semantic-token types (class, method, parameter,
+-- namespace, variable, decorator) to the plain foreground color, so they render
+-- as ordinary white text and all that type-aware classification is invisible.
+-- retrobox gives those token types distinct colors (class->green, type->orange,
+-- function->yellow, parameter->aqua), so the LSP's information actually shows.
+-- Swap the name for another built-in (habamax, sorbet, slate) to taste.
+-- ============================================================================
+
+vim.cmd.colorscheme 'retrobox'
 
 -- ============================================================================
 -- KEYMAPS  (:help vim.keymap.set)
