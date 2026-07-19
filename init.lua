@@ -80,6 +80,9 @@ vim.cmd.colorscheme 'retrobox'
 
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>', { desc = 'Clear search highlight' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Diagnostic [Q]uickfix list' })
+-- The inline virtual_text (see vim.diagnostic.config) is clipped at the viewport
+-- edge; this pops the full message, wrapped, in the bordered float configured there.
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
 
 -- Move between splits without the <C-w> prefix.
 vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Focus split left' })
