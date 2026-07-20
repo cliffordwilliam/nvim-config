@@ -27,6 +27,7 @@ vim.o.number = true
 vim.o.relativenumber = true -- pairs with counts: 5j, 12k
 vim.o.mouse = 'a'
 vim.o.showmode = false -- redundant; the cursor already tells you
+vim.o.ruler = false -- drop the 'line,col   All' readout from the statusline
 vim.o.termguicolors = true -- 24-bit color; the colorscheme below needs it
 
 -- Sync with the system clipboard. Scheduled because probing the clipboard
@@ -89,6 +90,14 @@ vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Focus split left' })
 vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Focus split right' })
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Focus split below' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Focus split above' })
+
+-- Going back where you came from -- these are built-in, no mapping needed here,
+-- noted so they're not forgotten:
+--   <C-o>  jump back to the previous location (e.g. after grd goto-definition);
+--          repeat to keep walking back. <C-i> (= <Tab>) jumps forward again.
+--          These walk the jumplist -- big moves (goto def, searches, G, {}, :N)
+--          are recorded; plain h/j/k/l are not. See :help jumplist and :jumps.
+--   <C-^>  toggle between the current buffer and the previous one.
 
 -- ============================================================================
 -- AUTOCOMMANDS  (:help lua-guide-autocommands)
@@ -230,7 +239,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 vim.diagnostic.config {
   severity_sort = true,
-  float = { border = 'rounded', source = 'if_many' },
+  float = { source = 'if_many' },
   virtual_text = { source = 'if_many', spacing = 2 },
   signs = vim.g.have_nerd_font and {
     text = {

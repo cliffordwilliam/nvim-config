@@ -116,10 +116,28 @@ Leader is `<Space>`.
 | `<leader>sk` | Search keymaps |
 | `<leader>sd` | Search diagnostics |
 | `<leader><leader>` | Switch buffer |
+| `<F4>` | Toggle the fzf preview pane inside a picker |
 | `grd` / `grr` | Goto definition / references |
 | `grn` / `gra` | Rename / code action |
 | `K` | Hover docs |
 | `<leader>q` | Diagnostics to quickfix |
+
+### Getting back where you came from
+
+These are built-in Neovim keys (no config), and they're the answer to "I
+jumped into a definition, how do I go back?".
+
+| Key | Action |
+| :-- | :--- |
+| `<C-o>` | Jump **back** to where you were (e.g. after `grd`). Press again to keep going back. |
+| `<C-i>` | Jump **forward** again (undo a `<C-o>`). Same key as `<Tab>`. |
+| `<C-^>` | Toggle between the current file and the last one you were in |
+| `:jumps` | Show the whole back/forward trail |
+
+`<C-o>`/`<C-i>` walk the **jumplist** — Neovim records the "big" moves (goto
+definition, searches, `G`, `{`/`}`, `:123`) but not plain `h`/`j`/`k`/`l`, so
+the trail stays useful. `<C-^>` is a two-file ping-pong, handy for a module and
+its test.
 
 Files format, sort imports, and autofix on save via ruff.
 
