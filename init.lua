@@ -75,6 +75,26 @@ vim.o.softtabstop = 4
 
 vim.cmd.colorscheme 'retrobox'
 
+-- retrobox builds the statusline with the `reverse` attribute, which swaps a
+-- muted grey-brown (#504945) onto a cream bar -- low-contrast and hard to read.
+-- Override it with an explicit light bar + near-black bold text instead. A
+-- ColorScheme autocmd (not a bare hi call) so it survives re-sourcing the scheme.
+vim.api.nvim_create_autocmd('ColorScheme', {
+  desc = 'High-contrast statusline',
+  group = vim.api.nvim_create_augroup('statusline-contrast', { clear = true }),
+  callback = function()
+    -- Near-black text (#1d2021) on a muted tan bar (#a89984), bold. Dark-on-light
+    -- keeps the text readable; the tan (vs bright cream) drops the bar's luminance
+    -- ~half so it doesn't compete with a bright tmux statusline for attention.
+    -- Both active and inactive groups get the same look -- splits aren't used here.
+    local statusline = { fg = '#1d2021', bg = '#a89984', bold = true }
+    vim.api.nvim_set_hl(0, 'StatusLine', statusline)
+    vim.api.nvim_set_hl(0, 'StatusLineNC', statusline)
+  end,
+})
+-- Fire once now for the colorscheme already set above.
+vim.cmd.doautocmd('ColorScheme')
+
 -- ============================================================================
 -- KEYMAPS  (:help vim.keymap.set)
 -- ============================================================================
