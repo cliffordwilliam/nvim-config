@@ -95,6 +95,12 @@ vim.api.nvim_create_autocmd('ColorScheme', {
 -- Fire once now for the colorscheme already set above.
 vim.cmd.doautocmd('ColorScheme')
 
+-- The built-in default statusline flushes the filename hard against the left
+-- edge. Set it explicitly to add one space of left padding. Content mirrors the
+-- default's left segment -- truncate-marker, path, then the help/preview/modified/
+-- readonly flags -- so nothing visible changes except the leading gap.
+vim.o.statusline = ' %<%f %h%w%m%r'
+
 -- ============================================================================
 -- KEYMAPS  (:help vim.keymap.set)
 -- ============================================================================
