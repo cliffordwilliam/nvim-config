@@ -154,9 +154,14 @@ vim.pack.add {
 -- and the live preview was a distraction. `previewer = false` removes it
 -- outright -- not merely hidden -- so there is no preview to appear or toggle,
 -- and no `bat`/builtin previewer dependency to think about.
+--
+-- It MUST live under `defaults` (applied to every picker), NOT as a top-level
+-- `previewer = false`: each picker (files, grep, ...) ships its own previewer
+-- default that silently overrides a top-level key, so the top-level form leaves
+-- the preview on. `defaults` is the one place that reliably reaches all pickers.
 require('fzf-lua').setup {
   'default',
-  previewer = false,
+  defaults = { previewer = false },
 }
 
 local fzf = require 'fzf-lua'
