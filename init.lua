@@ -150,10 +150,13 @@ vim.pack.add {
   { src = 'https://github.com/ibhagwan/fzf-lua', version = 'main' },
 }
 
--- 'default' profile, with the Lua previewer so no `bat` dependency is needed.
+-- 'default' profile, previewer fully disabled. The match list alone is enough
+-- and the live preview was a distraction. `previewer = false` removes it
+-- outright -- not merely hidden -- so there is no preview to appear or toggle,
+-- and no `bat`/builtin previewer dependency to think about.
 require('fzf-lua').setup {
   'default',
-  winopts = { preview = { default = 'builtin' } },
+  previewer = false,
 }
 
 local fzf = require 'fzf-lua'
